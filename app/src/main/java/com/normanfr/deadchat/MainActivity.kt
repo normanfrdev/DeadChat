@@ -20,11 +20,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         myWebView = findViewById(R.id.webview)
-        myWebView.webViewClient = WebViewClient() // Prevent opening in browser
+        myWebView.webViewClient = WebViewClient()
         val webSettings: WebSettings = myWebView.settings
-        webSettings.javaScriptEnabled = true // Enable JavaScript
+        webSettings.javaScriptEnabled = true
 
-        // Check battery level before loading the WebView
         checkBatteryAndLoadUrl()
     }
 
@@ -36,10 +35,9 @@ class MainActivity : AppCompatActivity() {
         val batteryPct: Float = level / scale.toFloat() * 100
 
         if (batteryPct > 5) {
-            // Show dialog and close the app
             showLowBatteryDialog()
         } else {
-            myWebView.loadUrl("https://www.example.com") // Load your URL here
+            myWebView.loadUrl("https://deadchat-web.glitch.me/")
         }
     }
 
@@ -49,14 +47,14 @@ class MainActivity : AppCompatActivity() {
             .setMessage("Only use if below 5%")
             .setCancelable(false)
             .setPositiveButton("OK") { dialog: DialogInterface, _: Int ->
-                finish() // Close the app
+                finish()
             }
             .show()
     }
 
     override fun onBackPressed() {
         if (myWebView.canGoBack()) {
-            myWebView.goBack() // Navigate back in WebView history
+            myWebView.goBack()
         } else {
             super.onBackPressed()
         }
